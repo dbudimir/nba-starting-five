@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Search from './Search';
 import StartingFive from './StartingFive';
-import imageURL from '../img-search';
 
 class Body extends Component {
    constructor() {
@@ -16,7 +15,7 @@ class Body extends Component {
       return (
          <div>
             <Search />
-            <p>{imageURL}</p>
+            <p>test</p>
             <StartingFive />
          </div>
       );

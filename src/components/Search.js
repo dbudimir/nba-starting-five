@@ -1,13 +1,14 @@
+import request from 'request';
 import React, { Component } from 'react';
 import axios from 'axios';
-import nba from 'nba.js';
 
 class Search extends Component {
    constructor() {
       super();
       this.state = {
-         searchInput: 'lebron james',
-         playerId: '',
+         searchInput: '',
+         currentplayerId: '',
+         playerList: [],
       };
    }
 
@@ -17,22 +18,23 @@ class Search extends Component {
             `https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=2017-18`
          )
          .then(res => {
-            console.log(res.data.resultSets[0].rowSet);
-            // this.setState({
-            //     res.data[0].orders,
-            // });
+            const players = res.data.resultSets[0].rowSet;
+            const allPlayers = [];
+            players.forEach(player => {
+               allPlayers.push({
+                  playerID: player[0],
+                  playerFullName: player[2],
+                  playerFullNameLowerCase: player[2].toLowerCase(),
+               });
+               this.setState({
+                  playerList: allPlayers,
+               });
+            });
          })
          .catch(err => {
             console.log(err);
          });
    }
-
-   // getPlayers = () => {
-   //    nba.stats
-   //       .allPlayers({ IsOnlyCurrentSeason: 0 })
-   //       .then(res => console.log(res))
-   //       .catch(err => console.error(err));
-   // };
 
    updateState = event => {
       const { target } = event;
@@ -40,8 +42,50 @@ class Search extends Component {
       const { name } = target;
 
       this.setState({
-         ...this.state.order,
+         ...this.state,
          [name]: value,
+      });
+   };
+
+   getPlayerID = e => {
+      e.preventDefault();
+      const playerResult = this.state.playerList;
+      playerResult.filter(player => {
+         if (player.playerFullNameLowerCase === this.state.searchInput)
+            axios
+               .get(
+                  `https://stats.nba.com/stats/commonplayerinfo/?PlayerId=${player.playerID}&SeasonType=Regular+Season&LeagueId=00`
+               )
+               .then(res => {
+                  this.setState({
+                     currentPlayer: {
+                        playerID: res.data.resultSets[1].rowSet[0][0],
+                        playerName: res.data.resultSets[1].rowSet[0][1],
+                        careerPPG: res.data.resultSets[1].rowSet[0][3],
+                        careerAPG: res.data.resultSets[1].rowSet[0][4],
+                        careerRPG: res.data.resultSets[1].rowSet[0][5],
+                        yearsActive: res.data.resultSets[0].rowSet[0][12],
+                     },
+                  });
+               })
+               .then(() => {
+                  const subscriptionKey = '31c5082e88ae4447a14da37ba0e6efbc';
+                  const searchTerm = `${this.state.searchInput}`;
+                  const info = {
+                     url: `https://api.cognitive.microsoft.com/bing/v7.0/images/search?q="${searchTerm}"`,
+                     headers: {
+                        'Ocp-Apim-Subscription-Key': subscriptionKey,
+                     },
+                  };
+                  const ImageURL = request(info, function(
+                     error,
+                     response,
+                     body
+                  ) {
+                     const searchResponse = JSON.parse(body);
+                     console.log(searchResponse.value[0].contentUrl);
+                  });
+               });
       });
    };
 
@@ -54,7 +98,7 @@ class Search extends Component {
                className="text-input"
                name="searchInput"
             />
-            <button onClick={this.getPlayers} type="button">
+            <button onClick={this.getPlayerID} type="button">
                get players
             </button>
          </div>
