@@ -6,7 +6,7 @@ class Search extends Component {
    constructor() {
       super();
       this.state = {
-         searchInput: '',
+         searchInput: 'lebron james',
          playerId: '',
       };
    }
