@@ -10,6 +10,7 @@ class Search extends Component {
          currentPlayerId: '',
          currentPlayerImage: '',
          currentPlayerObject: {},
+         topFive: [],
          playerList: [],
       };
    }
@@ -62,45 +63,51 @@ class Search extends Component {
                   'Ocp-Apim-Subscription-Key': subscriptionKey,
                },
             };
-            request(info, function(error, response, body) {
-               const searchResponse = JSON.parse(body);
-               console.log(searchResponse.value[0].contentUrl);
-               localStorage.setItem(
-                  'playerImage',
-                  `${searchResponse.value[0].contentUrl}`
-               );
-            });
             axios
                .get(
                   `https://stats.nba.com/stats/commonplayerinfo/?PlayerId=${player.playerID}&SeasonType=Regular+Season&LeagueId=00`
                )
                .then(res => {
-                  this.setState({
-                     currentPlayerObject: {
-                        playerID: res.data.resultSets[1].rowSet[0][0],
-                        playerName: res.data.resultSets[1].rowSet[0][1],
-                        careerPPG: res.data.resultSets[1].rowSet[0][3],
-                        careerAPG: res.data.resultSets[1].rowSet[0][4],
-                        careerRPG: res.data.resultSets[1].rowSet[0][5],
-                        yearsActive: res.data.resultSets[0].rowSet[0][12],
-                        playerImage: localStorage.playerImage,
-                     },
-                  });
-                  console.log(this.state.currentPlayerObject);
+                  request(
+                     info,
+                     function(error, response, body) {
+                        const searchResponse = JSON.parse(body);
+                        this.setState({
+                           topFive: [
+                              {
+                                 playerID: res.data.resultSets[1].rowSet[0][0],
+                                 playerName: res.data.resultSets[1].rowSet[0][1],
+                                 careerPPG: res.data.resultSets[1].rowSet[0][3],
+                                 careerAPG: res.data.resultSets[1].rowSet[0][4],
+                                 careerRPG: res.data.resultSets[1].rowSet[0][5],
+                                 yearsActive: res.data.resultSets[0].rowSet[0][12],
+                                 playerImage: searchResponse.value[0].contentUrl,
+                              },
+                              ...this.state.topFive,
+                           ],
+                        });
+                        console.log(this.state);
+                        // This is where we'll pass information to the API
+                     }.bind(this)
+                  );
                });
          }
       });
+      // this.setState(prevState => ({
+      //    myArray: [...prevState.myArray, 'new value'],
+      // }));
    };
+
+   // updateTopFive = () => {
+   //    console.log(this.state.currentPlayerObject);
+   //    this.setState({});
+   // };
 
    render() {
       return (
          <div>
             <p>Search for a player</p>
-            <input
-               onChange={this.updateState}
-               className="text-input"
-               name="searchInput"
-            />
+            <input onChange={this.updateState} className="text-input" name="searchInput" />
             <button onClick={this.getPlayerID} type="button">
                get players
             </button>
