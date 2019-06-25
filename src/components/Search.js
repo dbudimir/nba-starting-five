@@ -7,7 +7,9 @@ class Search extends Component {
       super();
       this.state = {
          searchInput: '',
-         currentplayerId: '',
+         currentPlayerId: '',
+         currentPlayerImage: '',
+         currentPlayerObject: {},
          playerList: [],
       };
    }
@@ -51,41 +53,42 @@ class Search extends Component {
       e.preventDefault();
       const playerResult = this.state.playerList;
       playerResult.filter(player => {
-         if (player.playerFullNameLowerCase === this.state.searchInput)
+         if (player.playerFullNameLowerCase === this.state.searchInput) {
+            const subscriptionKey = '31c5082e88ae4447a14da37ba0e6efbc';
+            const searchTerm = player.playerFullNameLowerCase;
+            const info = {
+               url: `https://api.cognitive.microsoft.com/bing/v7.0/images/search?q="${searchTerm}"`,
+               headers: {
+                  'Ocp-Apim-Subscription-Key': subscriptionKey,
+               },
+            };
+            request(info, function(error, response, body) {
+               const searchResponse = JSON.parse(body);
+               console.log(searchResponse.value[0].contentUrl);
+               localStorage.setItem(
+                  'playerImage',
+                  `${searchResponse.value[0].contentUrl}`
+               );
+            });
             axios
                .get(
                   `https://stats.nba.com/stats/commonplayerinfo/?PlayerId=${player.playerID}&SeasonType=Regular+Season&LeagueId=00`
                )
                .then(res => {
                   this.setState({
-                     currentPlayer: {
+                     cirrentPlayerObject: {
                         playerID: res.data.resultSets[1].rowSet[0][0],
                         playerName: res.data.resultSets[1].rowSet[0][1],
                         careerPPG: res.data.resultSets[1].rowSet[0][3],
                         careerAPG: res.data.resultSets[1].rowSet[0][4],
                         careerRPG: res.data.resultSets[1].rowSet[0][5],
                         yearsActive: res.data.resultSets[0].rowSet[0][12],
+                        playerImage: localStorage.playerImage,
                      },
                   });
-               })
-               .then(() => {
-                  const subscriptionKey = '31c5082e88ae4447a14da37ba0e6efbc';
-                  const searchTerm = `${this.state.searchInput}`;
-                  const info = {
-                     url: `https://api.cognitive.microsoft.com/bing/v7.0/images/search?q="${searchTerm}"`,
-                     headers: {
-                        'Ocp-Apim-Subscription-Key': subscriptionKey,
-                     },
-                  };
-                  const ImageURL = request(info, function(
-                     error,
-                     response,
-                     body
-                  ) {
-                     const searchResponse = JSON.parse(body);
-                     console.log(searchResponse.value[0].contentUrl);
-                  });
+                  console.log(this.state.cirrentPlayerObject);
                });
+         }
       });
    };
 
