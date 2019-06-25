@@ -76,7 +76,7 @@ class Search extends Component {
                )
                .then(res => {
                   this.setState({
-                     cirrentPlayerObject: {
+                     currentPlayerObject: {
                         playerID: res.data.resultSets[1].rowSet[0][0],
                         playerName: res.data.resultSets[1].rowSet[0][1],
                         careerPPG: res.data.resultSets[1].rowSet[0][3],
@@ -86,7 +86,7 @@ class Search extends Component {
                         playerImage: localStorage.playerImage,
                      },
                   });
-                  console.log(this.state.cirrentPlayerObject);
+                  console.log(this.state.currentPlayerObject);
                });
          }
       });
