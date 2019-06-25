@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 class StartingFive extends Component {
    constructor() {
       super();
-      this.state = {};
+      this.state = this.props;
    }
 
    render() {
       return (
          <div>
-            <h3>my players</h3>
+            <h3>all top fives</h3>
          </div>
       );
    }

@@ -1,0 +1,50 @@
+{
+	"name": "Davids great team",
+	"topFive": [
+		{
+			"careerAPG": "4.7",
+			"careerPPG": "25",
+			"careerRPG": "5.2",
+			"playerID": "977",
+			"playerImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Kobe_Bryant_warming_up.jpg/1200px-Kobe_Bryant_warming_up.jpg",
+			"playerName": "Kobe Bryant",
+			"yearsActive": "19"
+		},
+		{
+			"careerAPG": "4.7",
+			"careerPPG": "25",
+			"careerRPG": "5.2",
+			"playerID": "977",
+			"playerImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Kobe_Bryant_warming_up.jpg/1200px-Kobe_Bryant_warming_up.jpg",
+			"playerName": "Lebron James",
+			"yearsActive": "19"
+		},
+		{
+			"careerAPG": "4.7",
+			"careerPPG": "25",
+			"careerRPG": "5.2",
+			"playerID": "977",
+			"playerImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Kobe_Bryant_warming_up.jpg/1200px-Kobe_Bryant_warming_up.jpg",
+			"playerName": "Joe Smith",
+			"yearsActive": "19"
+		},
+		{
+			"careerAPG": "4.7",
+			"careerPPG": "25",
+			"careerRPG": "5.2",
+			"playerID": "977",
+			"playerImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Kobe_Bryant_warming_up.jpg/1200px-Kobe_Bryant_warming_up.jpg",
+			"playerName": "Ellison Rio",
+			"yearsActive": "19"
+		},
+		{
+			"careerAPG": "4.7",
+			"careerPPG": "25",
+			"careerRPG": "5.2",
+			"playerID": "977",
+			"playerImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Kobe_Bryant_warming_up.jpg/1200px-Kobe_Bryant_warming_up.jpg",
+			"playerName": "David Budimir",
+			"yearsActive": "19"
+		}
+	]
+}

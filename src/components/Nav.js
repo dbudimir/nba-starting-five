@@ -34,9 +34,9 @@ class Nav extends Component {
             <Link to="/">
                <h1>Starting Five</h1>
             </Link>
-            <div>
-               <span>test</span>
-            </div>
+            <Link to="/create-lineup">
+               <span>Create a lineup</span>
+            </Link>
          </NavBar>
       );
    }

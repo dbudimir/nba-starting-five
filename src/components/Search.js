@@ -18,7 +18,7 @@ class Search extends Component {
    componentDidMount() {
       axios
          .get(
-            `https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=2017-18`
+            `https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=00`
          )
          .then(res => {
             const players = res.data.resultSets[0].rowSet;
@@ -86,24 +86,23 @@ class Search extends Component {
                               ...this.state.topFive,
                            ],
                         });
-                        console.log(this.state);
+                        console.log(this.state.topFive[0]);
+                        console.log(this.state.topFive);
+                        axios.post(
+                           'https://nba-starting-five.herokuapp.com/api/players/new',
+                           this.state.topFive[0]
+                        );
+                        this.props.getPlayers(this.state.topFive);
                         // This is where we'll pass information to the API
                      }.bind(this)
                   );
                });
          }
       });
-      // this.setState(prevState => ({
-      //    myArray: [...prevState.myArray, 'new value'],
-      // }));
    };
 
-   // updateTopFive = () => {
-   //    console.log(this.state.currentPlayerObject);
-   //    this.setState({});
-   // };
-
    render() {
+      // this.props.getPlayers({ playerID: "test" });
       return (
          <div>
             <p>Search for a player</p>

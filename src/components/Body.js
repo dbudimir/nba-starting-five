@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Search from './Search';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import StartingFive from './StartingFive';
+import StartingFiveUserSubmit from './StartingFiveUserSubmit';
 
 class Body extends Component {
    constructor() {
@@ -8,15 +10,26 @@ class Body extends Component {
       this.state = {
          searchInput: '',
          playerId: '',
+         playerArray: [],
       };
    }
+
+   // getPlayers = playerArray => {
+   //    this.setState({
+   //       playerArray,
+   //    });
+   // };
 
    render() {
       return (
          <div>
-            <Search />
-            <p>test</p>
-            <StartingFive />
+            <Switch>
+               <Route
+                  path="/create-lineup"
+                  render={props => <StartingFiveUserSubmit {...this.state} />}
+               />
+               <Route path="/" render={props => <StartingFive {...this.state} />} />
+            </Switch>
          </div>
       );
    }
