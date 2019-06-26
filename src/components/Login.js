@@ -19,7 +19,8 @@ class Login extends Component {
       super();
       this.state = {
          userId: '',
-         userFullName: '',
+         full_name: '',
+         username: '',
          email: '',
          password: '',
          passwordConfirm: '',
@@ -107,19 +108,17 @@ class Login extends Component {
          })
          .then(response => {
             localStorage.token = response.data.token;
-            this.setState(
-               {
-                  isLoggedIn: true,
-                  userId: response.data.userId,
-               },
-               this.props.logIn(this.state.email, this.state.password, response.data.userId, true)
-            );
+            this.setState({
+               isLoggedIn: true,
+               userId: response.data.userId,
+            });
+            this.props.logIn(this.state.email, this.state.password, response.data.userId, true);
          });
       alert('Nice!');
-      console.log(this.state);
    };
 
    render() {
+      console.log(this.props);
       return (
          <div className="form">
             <h1>Log In</h1>

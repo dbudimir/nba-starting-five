@@ -4,6 +4,7 @@ import styled from 'styled-components';
 // Children
 import Search from './Search';
 import PlayerCard from './PlayerCard';
+import Login from './Login';
 
 const MyPlayerContainer = styled.div`
    display: flex;
@@ -18,7 +19,7 @@ class StartingFiveUserSubmit extends Component {
          playerId: '',
          playerArray: [],
          user: {
-            loggedIn: false,
+            loggedIn: this.props.user.isLoggedIn,
             lineupNamed: false,
             lineupFull: false,
          },
@@ -46,11 +47,23 @@ class StartingFiveUserSubmit extends Component {
    };
 
    render() {
+      console.log(this.state);
       const players = this.state.playerArray;
       const playerCard = players.map((player, index) => <PlayerCard data={player} key={index} />);
 
       let startingFiveSubmit;
-      if (this.state.user.lineupNamed === false) {
+      if (localStorage.length === 0) {
+         startingFiveSubmit = (
+            <div>
+               <Login
+                  {...this.props}
+                  {...this.state}
+                  logOut={this.props.logOut}
+                  logIn={this.props.logIn}
+               />
+            </div>
+         );
+      } else if (this.state.user.lineupNamed === false && this.props.user.isLoggedIn === true) {
          startingFiveSubmit = (
             <div>
                <h3>Enter a name for your lineup</h3>

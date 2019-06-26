@@ -18,7 +18,8 @@ class Signup extends Component {
    constructor() {
       super();
       this.state = {
-         userFullName: '',
+         userId: '',
+         full_name: '',
          username: '',
          email: '',
          password: '',
@@ -37,6 +38,8 @@ class Signup extends Component {
 
    componentDidMount = () => {
       this.setState({
+         full_name: '',
+         username: '',
          email: this.props.email,
          password: this.props.password,
          isLoggedIn: false,
@@ -67,13 +70,13 @@ class Signup extends Component {
          })
          .then(response => {
             localStorage.token = response.data.token;
+            this.setState({
+               userId: response.data.userId,
+               isLoggedIn: true,
+            });
+            this.props.logIn(this.state.email, this.state.password, response.data.userId, true);
          });
-      this.setState({
-         isLoggedIn: true,
-      });
       alert('Nice!');
-      this.props.logIn(this.state.email, this.state.password, true);
-      console.log(this.state);
    };
 
    validateFields(fieldName, value) {
@@ -124,41 +127,56 @@ class Signup extends Component {
          <div className="form">
             <h1>Sign Up</h1>
             <Form>
-               <input
-                  name="userFullName"
+               <form>
+                  <input
+                     name="full_name"
+                     onChange={this.updateState}
+                     value={this.state.full_name}
+                     type="text"
+                     placeholder="enter your full name"
+                  />
+                  <div>
+                     <br />
+                  </div>
+                  {/* <input
+                  name="username"
                   onChange={this.updateState}
-                  value={this.state.userFullName}
+                  value={this.state.username}
                   type="text"
-                  placeholder="enter your full name"
+                  placeholder="create a username"
                />
                <div>
                   <br />
-               </div>
-               <input
-                  name="email"
-                  onChange={this.updateState}
-                  value={this.state.email}
-                  type="text"
-                  placeholder="email"
-               />
-               <ErrorMessage message={this.state.formErrors.email} state={this.state} />
-               <input
-                  name="password"
-                  onChange={this.updateState}
-                  value={this.state.password}
-                  type="password"
-                  placeholder="password"
-               />
-               <ErrorMessage message={this.state.formErrors.password} state={this.state} />
-               <input
-                  name="passwordConfirm"
-                  onChange={this.updateState}
-                  value={this.state.passwordConfirm}
-                  type="password"
-                  placeholder="re-enter password"
-               />
-               <ErrorMessage message={this.state.formErrors.confirmPassword} state={this.state} />
-               <input name="submit" onClick={this.onSubmit} type="submit" value="submit" />
+               </div> */}
+                  <input
+                     name="email"
+                     onChange={this.updateState}
+                     value={this.state.email}
+                     type="text"
+                     placeholder="email"
+                  />
+                  <ErrorMessage message={this.state.formErrors.email} state={this.state} />
+                  <input
+                     name="password"
+                     onChange={this.updateState}
+                     value={this.state.password}
+                     type="password"
+                     placeholder="password"
+                  />
+                  <ErrorMessage message={this.state.formErrors.password} state={this.state} />
+                  <input
+                     name="passwordConfirm"
+                     onChange={this.updateState}
+                     value={this.state.passwordConfirm}
+                     type="password"
+                     placeholder="re-enter password"
+                  />
+                  <ErrorMessage
+                     message={this.state.formErrors.confirmPassword}
+                     state={this.state}
+                  />
+                  <input name="submit" onClick={this.onSubmit} type="submit" value="submit" />
+               </form>
             </Form>
          </div>
       );
