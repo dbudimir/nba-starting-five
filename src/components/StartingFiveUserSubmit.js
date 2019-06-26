@@ -59,8 +59,6 @@ class StartingFiveUserSubmit extends Component {
    };
 
    render() {
-      console.log(this.props);
-
       let startingFiveSubmit;
       if (localStorage.length === 0) {
          startingFiveSubmit = (

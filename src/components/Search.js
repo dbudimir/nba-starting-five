@@ -1,6 +1,7 @@
 import request from 'request';
 import React, { Component } from 'react';
 import axios from 'axios';
+import changeCase from 'change-case';
 
 class Search extends Component {
    constructor(props) {
@@ -10,13 +11,21 @@ class Search extends Component {
          currentPlayerId: '',
          currentPlayerImage: '',
          currentPlayerObject: {},
+         playerID: '',
+         playerFullName: '',
+         playerFullNameLowerCase: '',
          lineup: [],
          playerList: [],
       };
    }
 
    componentDidMount() {
-      console.log('did this');
+      axios.get('https://nba-starting-five.herokuapp.com/api/players/').then(res => {
+         console.log(res.data);
+         this.setState({
+            playerDataBase: res.data,
+         });
+      });
       axios
          .get(
             `https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=00`
@@ -52,10 +61,21 @@ class Search extends Component {
    };
 
    getPlayer = e => {
-      // e.preventDefault();
-      const playerResult = this.state.playerList;
-      // axios.get;
-      playerResult.filter(player => {
+      e.preventDefault();
+      const playerDataBaseList = this.state.playerDataBase;
+      const publicPlayerList = this.state.playerList;
+
+      const playerInDB = playerDataBaseList.filter(player => {
+         if (
+            changeCase.lowerCase(player.playerName) === changeCase.lowerCase(this.state.searchInput)
+         ) {
+            return player;
+         }
+      });
+
+      console.log(playerInDB);
+
+      publicPlayerList.filter(player => {
          if (player.playerFullNameLowerCase === this.state.searchInput) {
             const subscriptionKey = '31c5082e88ae4447a14da37ba0e6efbc';
             const searchTerm = player.playerFullNameLowerCase;
@@ -102,6 +122,8 @@ class Search extends Component {
          }
       });
    };
+
+   updatePlayerArray = {};
 
    render() {
       return (
