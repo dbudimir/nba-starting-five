@@ -34,8 +34,14 @@ class Nav extends Component {
             <Link to="/">
                <h1>Starting Five</h1>
             </Link>
+            <Link to="/login">
+               <span>Log In</span>
+            </Link>
+            <Link to="/signup">
+               <span>Sign Up</span>
+            </Link>
             <Link to="/create-lineup">
-               <span>Create a lineup</span>
+               <span>Create a Lineup</span>
             </Link>
          </NavBar>
       );

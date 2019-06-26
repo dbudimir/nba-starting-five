@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class Search extends Component {
-   constructor() {
-      super();
+   constructor(props) {
+      super(props);
       this.state = {
          searchInput: '',
          currentPlayerId: '',
@@ -16,6 +16,7 @@ class Search extends Component {
    }
 
    componentDidMount() {
+      console.log('did this');
       axios
          .get(
             `https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=00`
@@ -29,9 +30,9 @@ class Search extends Component {
                   playerFullName: player[2],
                   playerFullNameLowerCase: player[2].toLowerCase(),
                });
-               this.setState({
-                  playerList: allPlayers,
-               });
+            });
+            this.setState({
+               playerList: allPlayers,
             });
          })
          .catch(err => {
@@ -51,7 +52,7 @@ class Search extends Component {
    };
 
    getPlayerID = e => {
-      e.preventDefault();
+      // e.preventDefault();
       const playerResult = this.state.playerList;
       playerResult.filter(player => {
          if (player.playerFullNameLowerCase === this.state.searchInput) {
@@ -102,7 +103,6 @@ class Search extends Component {
    };
 
    render() {
-      // this.props.getPlayers({ playerID: "test" });
       return (
          <div>
             <p>Search for a player</p>

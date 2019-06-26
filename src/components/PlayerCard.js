@@ -26,7 +26,7 @@ class PlayerCard extends Component {
       return (
          <Card>
             <div className="player-image">
-               <img src={this.props.data.playerImage} />
+               <img src={this.props.data.playerImage} alt={this.props.data.playerName} />
             </div>
             <span>{this.props.data.playerName}</span>
             <span>Career Stats</span>
