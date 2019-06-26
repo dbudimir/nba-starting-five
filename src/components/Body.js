@@ -42,6 +42,7 @@ class Body extends Component {
             isLoggedIn: status,
          },
       });
+      localStorage.setItem('userId', userId);
    };
 
    handleLogOut = () => {

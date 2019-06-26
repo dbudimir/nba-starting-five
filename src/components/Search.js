@@ -10,7 +10,7 @@ class Search extends Component {
          currentPlayerId: '',
          currentPlayerImage: '',
          currentPlayerObject: {},
-         topFive: [],
+         lineup: [],
          playerList: [],
       };
    }
@@ -51,9 +51,10 @@ class Search extends Component {
       });
    };
 
-   getPlayerID = e => {
+   getPlayer = e => {
       // e.preventDefault();
       const playerResult = this.state.playerList;
+      // axios.get;
       playerResult.filter(player => {
          if (player.playerFullNameLowerCase === this.state.searchInput) {
             const subscriptionKey = '31c5082e88ae4447a14da37ba0e6efbc';
@@ -74,7 +75,7 @@ class Search extends Component {
                      function(error, response, body) {
                         const searchResponse = JSON.parse(body);
                         this.setState({
-                           topFive: [
+                           lineup: [
                               {
                                  playerID: res.data.resultSets[1].rowSet[0][0],
                                  playerName: res.data.resultSets[1].rowSet[0][1],
@@ -84,16 +85,16 @@ class Search extends Component {
                                  yearsActive: res.data.resultSets[0].rowSet[0][12],
                                  playerImage: searchResponse.value[0].contentUrl,
                               },
-                              ...this.state.topFive,
+                              ...this.state.lineup,
                            ],
                         });
-                        console.log(this.state.topFive[0]);
-                        console.log(this.state.topFive);
+                        console.log(this.state.lineup[0]);
+                        console.log(this.state.lineup);
                         axios.post(
                            'https://nba-starting-five.herokuapp.com/api/players/new',
-                           this.state.topFive[0]
+                           this.state.lineup[0]
                         );
-                        this.props.getPlayers(this.state.topFive);
+                        this.props.getPlayers(this.state.lineup);
                         // This is where we'll pass information to the API
                      }.bind(this)
                   );
@@ -107,7 +108,7 @@ class Search extends Component {
          <div>
             <p>Search for a player</p>
             <input onChange={this.updateState} className="text-input" name="searchInput" />
-            <button onClick={this.getPlayerID} type="button">
+            <button onClick={this.getPlayer} type="button">
                get players
             </button>
          </div>

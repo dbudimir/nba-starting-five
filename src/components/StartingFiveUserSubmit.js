@@ -14,21 +14,25 @@ class StartingFiveUserSubmit extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         startingFiveName: '',
-         searchInput: '',
-         playerId: '',
-         playerArray: [],
+         lineup: {
+            name: '',
+            players: [],
+         },
          user: {
             loggedIn: this.props.user.isLoggedIn,
             lineupNamed: false,
             lineupFull: false,
+            userId: this.props.userId,
          },
       };
    }
 
    getPlayers = playerArray => {
       this.setState({
-         playerArray,
+         lineup: {
+            startingFiveName: this.state.lineup.startingFiveName,
+            players: playerArray,
+         },
       });
    };
 
@@ -38,18 +42,24 @@ class StartingFiveUserSubmit extends Component {
       });
    };
 
-   submitLineUpName = e => {
+   submitLineUpName = () => {
       this.setState({
          user: {
+            loggedIn: this.props.user.isLoggedIn,
             lineupNamed: true,
+            lineupFull: this.state.lineupFull,
+            userId: this.state.userId,
          },
       });
    };
 
+   submitLineUp = () => {
+      console.log(this.props);
+      console.log(this.state.players);
+   };
+
    render() {
-      console.log(this.state);
-      const players = this.state.playerArray;
-      const playerCard = players.map((player, index) => <PlayerCard data={player} key={index} />);
+      console.log(this.props);
 
       let startingFiveSubmit;
       if (localStorage.length === 0) {
@@ -63,7 +73,7 @@ class StartingFiveUserSubmit extends Component {
                />
             </div>
          );
-      } else if (this.state.user.lineupNamed === false && this.props.user.isLoggedIn === true) {
+      } else if (localStorage.length > 0 && this.state.user.lineupNamed === false) {
          startingFiveSubmit = (
             <div>
                <h3>Enter a name for your lineup</h3>
@@ -78,11 +88,16 @@ class StartingFiveUserSubmit extends Component {
             </div>
          );
       } else if (this.state.user.lineupNamed === true) {
+         const { players } = this.state.lineup;
+         const playerCard = players.map((player, index) => (
+            <PlayerCard data={player} key={index} />
+         ));
          startingFiveSubmit = (
             <div>
                <Search getPlayers={this.getPlayers} />
                <h3>My players</h3>
                <MyPlayerContainer>{playerCard}</MyPlayerContainer>
+               <span onClick={this.submitLineUp}>Submit Lineup</span>
             </div>
          );
       }
