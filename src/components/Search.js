@@ -51,7 +51,7 @@ class Search extends Component {
       this.getPlayersFromDB();
       axios
          .get(
-            `https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=00`
+            `https://cors-anywhere.herokuapp.com/https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=00`
          )
          .then(res => {
             const players = res.data.resultSets[0].rowSet;
