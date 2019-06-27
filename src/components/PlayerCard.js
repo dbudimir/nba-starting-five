@@ -22,7 +22,7 @@ class PlayerCard extends Component {
    }
 
    render() {
-      console.log(this.props.data.playerImage);
+      console.log(this.props);
       return (
          <Card>
             <div className="player-image">
@@ -43,6 +43,7 @@ class PlayerCard extends Component {
                   <span className="stat-type">APG</span>
                   <span className="stat-value">{this.props.data.careerAPG}</span>
                </div>
+               <span>Remove Player</span>
             </div>
          </Card>
       );
