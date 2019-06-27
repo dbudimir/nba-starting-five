@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+
+import StartingFiveContainer from './StartingFiveContainer';
+
+const Container = styled.div`
+   max-width: 80%;
+   width: 1024px;
+   margin: 0 auto;
+`;
 
 class StartingFive extends Component {
    constructor() {
@@ -11,9 +20,8 @@ class StartingFive extends Component {
 
    componentDidMount() {
       axios
-         .get(`http://localhost:8080/api/startingfive/`)
+         .get(`https://nba-starting-five.herokuapp.com/api/startingfive/`)
          .then(res => {
-            console.log(res.data);
             this.setState({
                startingFives: res.data,
             });
@@ -25,14 +33,15 @@ class StartingFive extends Component {
 
    render() {
       const { startingFives } = this.state;
-      const startingFiveContaier = startingFives.map(startingFive => {
-         console.log(startingFive.players);
-         return <p>{startingFive.name}</p>;
-      });
+      const startingFiveContainer = startingFives.map(startingFive => (
+         <StartingFiveContainer data={startingFive} />
+      ));
       return (
          <div>
-            <h3>all top fives</h3>
-            {startingFiveContaier}
+            <Container>
+               {/* <h1>Popular Lineups</h1> */}
+               {startingFiveContainer}
+            </Container>
          </div>
       );
    }

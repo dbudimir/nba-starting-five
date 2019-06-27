@@ -7,8 +7,9 @@ import Search from './Search';
 import PlayerCard from './PlayerCard';
 import Login from './Login';
 
-const MyPlayerContainer = styled.div`
-   display: flex;
+const SubmitContainer = styled.div`
+   margin: 0 auto;
+   max-width: 1024px;
 `;
 
 class StartingFiveUserSubmit extends Component {
@@ -23,7 +24,7 @@ class StartingFiveUserSubmit extends Component {
             loggedIn: this.props.user.isLoggedIn,
             lineupNamed: false,
             lineupFull: false,
-            userId: this.props.userId,
+            userId: localStorage.userId,
          },
       };
    }
@@ -31,15 +32,24 @@ class StartingFiveUserSubmit extends Component {
    getPlayers = playerArray => {
       this.setState({
          lineup: {
-            startingFiveName: this.state.lineup.startingFiveName,
+            name: this.state.lineup.name,
             players: playerArray,
+         },
+         user: {
+            loggedIn: this.state.user.loggedIn,
+            lineupNamed: this.state.user.lineupNamed,
+            lineupFull: this.state.user.lineupFull,
+            userId: localStorage.userId,
          },
       });
    };
 
    updateLineUpName = e => {
       this.setState({
-         startingFiveName: e.target.value,
+         lineup: {
+            name: e.target.value,
+            players: this.state.lineup.players,
+         },
       });
    };
 
@@ -49,14 +59,18 @@ class StartingFiveUserSubmit extends Component {
             loggedIn: this.props.user.isLoggedIn,
             lineupNamed: true,
             lineupFull: this.state.lineupFull,
-            userId: this.state.userId,
+            userId: localStorage.userId,
          },
       });
    };
 
    submitLineUp = () => {
-      console.log(this.props);
-      console.log(this.state.players);
+      if (this.state.lineup.players.length < 5) {
+         alert('add five players to your lineup');
+      } else {
+         console.log(this.state);
+         axios.post('https://nba-starting-five.herokuapp.com/api/startingfive/new', this.state);
+      }
    };
 
    render() {
@@ -76,11 +90,7 @@ class StartingFiveUserSubmit extends Component {
          startingFiveSubmit = (
             <div>
                <h3>Enter a name for your lineup</h3>
-               <input
-                  onChange={this.updateLineUpName}
-                  className="text-input"
-                  name="startingFiveName"
-               />
+               <input onChange={this.updateLineUpName} className="text-input" name="name" />
                <div onClick={this.submitLineUpName}>
                   <span>Next</span>
                </div>
@@ -95,13 +105,13 @@ class StartingFiveUserSubmit extends Component {
             <div>
                <Search getPlayers={this.getPlayers} />
                <h3>My players</h3>
-               <MyPlayerContainer>{playerCard}</MyPlayerContainer>
+               <div>{playerCard}</div>
                <span onClick={this.submitLineUp}>Submit Lineup</span>
             </div>
          );
       }
 
-      return <div>{startingFiveSubmit}</div>;
+      return <SubmitContainer>{startingFiveSubmit}</SubmitContainer>;
    }
 }
 

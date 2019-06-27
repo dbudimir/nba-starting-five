@@ -30,11 +30,22 @@ class Search extends Component {
       });
    };
 
+   // testAxios = () => {
+   //    console.log('testAxios start');
+   //    axios
+   //       .get(
+   //          `https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=00`
+   //       )
+   //       .then(res => {
+   //          console.log('do we have a response...');
+   //          console.log(res.data);
+   //       });
+   // };
+
    getPlayersFromDB = newPlayer => {
       axios
          .get('https://nba-starting-five.herokuapp.com/api/players/')
          .then(res => {
-            console.log(res.data);
             this.setState({
                playerDataBase: res.data,
             });
@@ -51,7 +62,7 @@ class Search extends Component {
       this.getPlayersFromDB();
       axios
          .get(
-            `https://cors-anywhere.herokuapp.com/https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=00`
+            `https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=00`
          )
          .then(res => {
             const players = res.data.resultSets[0].rowSet;
@@ -140,8 +151,6 @@ class Search extends Component {
             lineup: [playerStats, ...this.state.lineup],
          },
          () => {
-            console.log(this.state.lineup[0]);
-            console.log(this.state.lineup);
             if (this.state.lineup.length >= 6) {
                alert('Please only select five players');
             } else {
