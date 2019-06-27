@@ -29,15 +29,29 @@ const NavBar = styled.div`
 
 class Nav extends Component {
    render() {
+      console.log(this.props);
+      let userLoggedIn;
+      if (localStorage.length === 0) {
+         userLoggedIn = (
+            <Link to="/login">
+               <span>Log In</span>
+            </Link>
+         );
+      } else if (localStorage.length > 0) {
+         userLoggedIn = (
+            <Link to="/" onClick={this.props.logOut}>
+               <span>Log Out</span>
+            </Link>
+         );
+      }
+
       return (
          <NavBar>
             <Link to="/">
                <h1>Starting Five</h1>
             </Link>
             <div>
-               <Link to="/login">
-                  <span>Log In</span>
-               </Link>
+               {userLoggedIn}
                <Link to="/signup">
                   <span>Sign Up</span>
                </Link>

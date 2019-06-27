@@ -1,13 +1,42 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
 import ErrorMessage from './ErrorMessage';
 
 const Form = styled.div`
+   margin-top: 60px;
+   h3 {
+      margin-bottom: 32px;
+   }
    .label {
       margin-top: 12px;
       font-weight: 800;
+   }
+   input {
+      width: 500px;
+      height: 48px;
+      border: 0px;
+      border-bottom: 3px solid #000000;
+      font-size: 32px;
+      margin-bottom: 12px;
+      margin-top: 32px;
+      padding: 0 4px;
+   }
+   input::placeholder {
+      font-size: 32px;
+      padding: 6px 6px 0;
+      line-height: 1;
+   }
+   input[name='submit'] {
+      border-radius: 6px;
+      margin-bottom: 64px;
+      border-bottom: 0px;
+      font-size: 24px;
+      font-weight: 800;
+      background-color: #fa8320;
+      width: 200px;
    }
    span {
       display: block;
@@ -69,7 +98,9 @@ class Login extends Component {
       switch (fieldName) {
          case 'email':
             emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-            formErrors.email = emailValid ? '' : 'Please use a valid email address.';
+            formErrors.email = emailValid
+               ? ''
+               : 'Please use a valid email address.';
             break;
          case 'password':
             passwordValid = value.length >= 7;
@@ -95,7 +126,9 @@ class Login extends Component {
    validateAll = () => {
       this.setState({
          allValid:
-            this.state.emailValid && this.state.passwordValid && this.state.confirmPasswordValid,
+            this.state.emailValid &&
+            this.state.passwordValid &&
+            this.state.confirmPasswordValid,
       });
    };
 
@@ -112,33 +145,51 @@ class Login extends Component {
                isLoggedIn: true,
                userId: response.data.userId,
             });
-            this.props.logIn(this.state.email, this.state.password, response.data.userId, true);
+            this.props.logIn(
+               this.state.email,
+               this.state.password,
+               response.data.userId,
+               true
+            );
          });
-      alert('Nice!');
    };
 
    render() {
       return (
          <div className="form">
-            <h1>Log In</h1>
-            <Form>
+            <Form className="user-form">
+               <h3>Log In</h3>
                <input
                   name="email"
                   onChange={this.updateState}
                   value={this.state.email}
                   type="text"
-                  placeholder="email"
+                  placeholder="Enter your email"
                />
-               <ErrorMessage message={this.state.formErrors.email} state={this.state} />
+               <ErrorMessage
+                  message={this.state.formErrors.email}
+                  state={this.state}
+               />
                <input
                   name="password"
                   onChange={this.updateState}
                   value={this.state.password}
                   type="password"
-                  placeholder="password"
                />
-               <ErrorMessage message={this.state.formErrors.password} state={this.state} />
-               <input name="submit" onClick={this.onSubmit} type="submit" value="submit" />
+            <ErrorMessage
+                  message={this.state.formErrors.password}
+                  state={this.state}
+               />
+               <input
+                  name="submit"
+                  onClick={this.onSubmit}
+                  type="submit"
+                  value="submit"
+               />
+               <span className="sign-up-now">
+                  Don't have an account?{' '}
+                  <Link to="/signup"> Click here to sign up now</Link>
+               </span>
             </Form>
          </div>
       );

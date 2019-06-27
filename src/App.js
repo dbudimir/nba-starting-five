@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Nav from './components/Nav';
 import Body from './components/Body';
 
-function App() {
-   return (
-      <div>
-         <Nav />
+class App extends Component {
+   handleLogOut = () => {
+      console.log('logging out now');
+      this.setState({
+         user: {
+            email: '',
+            password: '',
+            userId: '',
+            isLoggedIn: false,
+         },
+      });
+      localStorage.clear();
+   };
+
+   render() {
+      return (
          <div>
-            <Body />
+            <Nav logOut={this.handleLogOut} />
+            <div>
+               <Body />
+            </div>
          </div>
-      </div>
-   );
+      );
+   }
 }
 
 export default App;

@@ -45,19 +45,6 @@ class Body extends Component {
       localStorage.setItem('userId', userId);
    };
 
-   handleLogOut = () => {
-      console.log('logging out now');
-      this.setState({
-         user: {
-            email: '',
-            password: '',
-            userId: '',
-            isLoggedIn: false,
-         },
-      });
-      localStorage.clear();
-   };
-
    render() {
       return (
          <div>
@@ -97,9 +84,6 @@ class Body extends Component {
                />
                <Route path="/" render={props => <StartingFive {...this.state} />} />
             </Switch>
-            <LogOut>
-               <span onClick={this.handleLogOut}>LogOut</span>
-            </LogOut>
          </div>
       );
    }

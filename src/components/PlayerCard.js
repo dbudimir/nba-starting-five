@@ -8,7 +8,7 @@ const Card = styled.div`
       margin: 0 auto;
       display: block;
       width: fit-content;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 800;
       margin-bottom: 12px;
       white-space: nowrap;
