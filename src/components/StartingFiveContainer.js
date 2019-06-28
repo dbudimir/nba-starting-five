@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import styled from 'styled-components';
 
 import PlayerCard from './PlayerCard';
@@ -19,6 +21,9 @@ const Outer = styled.div`
          margin-left: 0px;
       }
    }
+   a {
+      text-decoration: none;
+   }
 `;
 
 const LineUpContainer = styled.div`
@@ -28,7 +33,40 @@ const LineUpContainer = styled.div`
 `;
 
 class StartingFiveContainer extends Component {
+   constructor() {
+      super();
+      this.state = {
+         users: [],
+      };
+   }
+
+   componentDidMount() {
+      axios
+         .get(`https://nba-starting-five.herokuapp.com/api/users/`)
+         .then(res => {
+            this.setState({
+               users: res.data,
+            });
+         })
+         .catch(err => {
+            console.log(err);
+         });
+   }
+
    render() {
+      const userStartingFive = this.state.users.map(user =>
+         user.starting_five.map(thisFive => {
+            if (thisFive._id === this.props.data._id) {
+               return (
+                  <span>
+                     Posted by:
+                     <Link to={`/users/${user._id}`}> {user.full_name}</Link>
+                  </span>
+               );
+            }
+         })
+      );
+
       const lineup = this.props.data.players;
       const playersLineup = lineup.map((lineup, index) => (
          <PlayerCard data={lineup} key={index} />
@@ -37,6 +75,7 @@ class StartingFiveContainer extends Component {
       return (
          <Outer className="lineup-outer">
             <h3>{this.props.data.name}</h3>
+            {userStartingFive}
             <LineUpContainer className="lineup-container">
                {playersLineup}
             </LineUpContainer>

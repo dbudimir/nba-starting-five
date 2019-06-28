@@ -55,6 +55,7 @@ class Signup extends Component {
    onSubmit = async event => {
       event.preventDefault();
       const { state } = this;
+      console.log(this.state);
       axios
          .post('https://nba-starting-five.herokuapp.com/api/users/signup', {
             ...state,

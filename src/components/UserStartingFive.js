@@ -26,13 +26,16 @@ class UserStartingFive extends Component {
    }
 
    componentDidMount() {
-      const thisUser = localStorage.userId;
+      const pathName = this.props.location.pathname;
+      console.log(pathName);
+      const thisUser = pathName.substr(7);
+      console.log(thisUser);
+
       axios
          .get(
             `https://nba-starting-five.herokuapp.com/api/users/id/${thisUser}`
          )
          .then(res => {
-            console.log(res.data[0].starting_five);
             this.setState({
                startingFives: res.data[0].starting_five,
             });

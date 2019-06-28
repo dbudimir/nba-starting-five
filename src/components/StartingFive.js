@@ -29,7 +29,6 @@ class StartingFive extends Component {
          .catch(err => {
             console.log(err);
          });
-      console.log(localStorage.userId);
    }
 
    render() {
