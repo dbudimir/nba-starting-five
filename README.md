@@ -1,6 +1,8 @@
 ## Starting Five - NBA Lineup Creator
 
-This repo represents the front end of the Starting Five - NBA Lineup Creator. Read more read about the associated API [here.](https://github.com/ellisonr/api-nba-starting-five).
+This repo represents the front end of the Starting Five - NBA Lineup Creator.
+
+Read more read about the associated API [here.](https://github.com/ellisonr/api-nba-starting-five)
 
 This simple app allows users to create an account, login, create a list of 5 players as part of a unique lineup. Users will be able to share their top players for any niche category they choose. For example, top 5 best dunkers, Canadian players, best all time Lakers etc.
 
@@ -71,7 +73,11 @@ if (playerInDB.length === 0) {
 
 ### **Site Structure**
 
--  **Navigation** - **Login**: User can login to an existing account. - **My Lineups**: After a user has logged in they can see a list of their existing lineups. - **Signup**: Allows a new user to sign up. - **Create a Lineup**: A two step flow that allows a user to create their lineup. If a user is not logged in they will be prompted to login before they can create a lineup.
+-  **Navigation**
+-  **Login**: User can login to an existing account.
+-  **My Lineups**: After a user has logged in they can see a list of their existing lineups.
+-  **Signup**: Allows a new user to sign up.
+-  **Create a Lineup**: A two step flow that allows a user to create their lineup. If a user is not logged in they will be prompted to login before they can create a lineup.
 -  **Home**: A feed of recent line.ups submitted by users.
 
 ### **Dependencies**
@@ -89,12 +95,12 @@ if (playerInDB.length === 0) {
 
 ### **Technologies Used**
 
-**Javascript**
-**React**
-**Styled Components**
-**Bing Search API**
+-  **Javascript**
+-  **React**
+-  **Styled Components**
+-  **Bing Search API**
 
-#### Contribution Guidelines
+### **Contribution Guidelines**
 
 Fork and clone this repo, contribute from a new branch.
 
