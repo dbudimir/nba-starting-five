@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
+
+import Form from './styles/Form';
 
 import ErrorMessage from './ErrorMessage';
-
-const Form = styled.div`
-   .label {
-      margin-top: 12px;
-      font-weight: 800;
-   }
-   span {
-      display: block;
-   }
-`;
 
 class Signup extends Component {
    constructor() {
@@ -81,7 +72,7 @@ class Signup extends Component {
                true
             );
          });
-      alert('Nice!');
+      alert("You're in!");
    };
 
    validateFields(fieldName, value) {
@@ -101,7 +92,7 @@ class Signup extends Component {
             passwordValid = value.length >= 7;
             formErrors.password = passwordValid
                ? ''
-               : "Please use a password that's longer thant 7 charcters";
+               : "Please use a password that's longer thant 7 characters";
             break;
          case 'passwordConfirm':
             confirmPasswordValid =
@@ -137,15 +128,15 @@ class Signup extends Component {
    render() {
       return (
          <div className="form">
-            <h1>Sign Up</h1>
-            <Form>
+            <Form className="signup-form">
+               <h3>Sign Up</h3>
                <form>
                   <input
                      name="full_name"
                      onChange={this.updateState}
                      value={this.state.full_name}
                      type="text"
-                     placeholder="enter your full name"
+                     placeholder="Enter your full name"
                   />
                   <div>
                      <br />
@@ -155,7 +146,7 @@ class Signup extends Component {
                      onChange={this.updateState}
                      value={this.state.email}
                      type="text"
-                     placeholder="email"
+                     placeholder="Email"
                   />
                   <ErrorMessage
                      message={this.state.formErrors.email}
@@ -166,7 +157,7 @@ class Signup extends Component {
                      onChange={this.updateState}
                      value={this.state.password}
                      type="password"
-                     placeholder="password"
+                     placeholder="Password"
                   />
                   <ErrorMessage
                      message={this.state.formErrors.password}
@@ -177,7 +168,7 @@ class Signup extends Component {
                      onChange={this.updateState}
                      value={this.state.passwordConfirm}
                      type="password"
-                     placeholder="re-enter password"
+                     placeholder="Re-enter password"
                   />
                   <ErrorMessage
                      message={this.state.formErrors.confirmPassword}
@@ -187,7 +178,7 @@ class Signup extends Component {
                      name="submit"
                      onClick={this.onSubmit}
                      type="submit"
-                     value="submit"
+                     value="Sign Up"
                   />
                </form>
             </Form>

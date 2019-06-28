@@ -110,7 +110,6 @@ class StartingFiveUserSubmit extends Component {
       if (this.state.lineup.players.length < 5) {
          alert('Add five players to your lineup');
       } else {
-         console.log(this.state);
          axios.post(
             'https://nba-starting-five.herokuapp.com/api/startingfive/new',
             this.state

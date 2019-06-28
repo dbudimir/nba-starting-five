@@ -1,23 +1,16 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import styled from 'styled-components';
+import { Route, Switch } from 'react-router-dom';
 
 // Children
 import StartingFive from './StartingFive';
 import StartingFiveUserSubmit from './StartingFiveUserSubmit';
+import UserStartingFive from './UserStartingFive';
 import Login from './Login';
 import Signup from './Signup';
 
-const LogOut = styled.div`
-   position: absolute;
-   bottom: 0;
-   right: 0;
-   padding: 12px 24px;
-`;
-
 class Body extends Component {
-   constructor() {
-      super();
+   constructor(props) {
+      super(props);
       this.state = {
          user: {
             email: '',
@@ -32,18 +25,18 @@ class Body extends Component {
       };
    }
 
-   handleLogIn = (email, password, userId, status) => {
-      console.log('logging in now');
+   handleLogIn = (email, password, userId) => {
       this.setState({
          user: {
             email,
             password,
             userId,
-            isLoggedIn: status,
+            isLoggedIn: true,
          },
       });
+      console.log('logging in now');
       localStorage.setItem('userId', userId);
-      window.location.reload();
+      this.props.logIn(this.state);
    };
 
    render() {
@@ -81,6 +74,12 @@ class Body extends Component {
                         logOut={this.handleLogOut}
                         logIn={this.handleLogIn}
                      />
+                  )}
+               />
+               <Route
+                  path="/users/:id"
+                  render={props => (
+                     <UserStartingFive {...props} {...this.state} />
                   )}
                />
                <Route

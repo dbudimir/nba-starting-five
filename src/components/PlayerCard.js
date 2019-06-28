@@ -49,6 +49,7 @@ const Card = styled.div`
             margin-bottom: 6px;
             .stat-value {
                font-weight: 600;
+               letter-spacing: -1px;
             }
          }
       }

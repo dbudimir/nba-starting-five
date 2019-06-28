@@ -24,7 +24,9 @@ const LineUpContainer = styled.div`
 class StartingFiveContainer extends Component {
    render() {
       const lineup = this.props.data.players;
-      const playersLineup = lineup.map(lineup => <PlayerCard data={lineup} />);
+      const playersLineup = lineup.map((lineup, index) => (
+         <PlayerCard data={lineup} key={index} />
+      ));
 
       return (
          <Outer className="lineup-outer">

@@ -7,9 +7,25 @@ class App extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         user: {},
+         user: {
+            email: '',
+            password: '',
+            userId: '',
+            isLoggedIn: false,
+         },
       };
    }
+
+   setLogIn = bodyState => {
+      this.setState({
+         user: {
+            email: bodyState.user.email,
+            password: bodyState.user.password,
+            userId: bodyState.user.userId,
+            isLoggedIn: true,
+         },
+      });
+   };
 
    handleLogOut = () => {
       console.log('logging out now');
@@ -27,9 +43,13 @@ class App extends Component {
    render() {
       return (
          <div>
-            <Nav logOut={this.handleLogOut} />
+            <Nav
+               logOut={this.handleLogOut}
+               isLoggedIn={this.state.user.isLoggedIn}
+               userId={this.state.user.userId}
+            />
             <div>
-               <Body {...this.state} />
+               <Body {...this.props} {...this.state} logIn={this.setLogIn} />
             </div>
          </div>
       );

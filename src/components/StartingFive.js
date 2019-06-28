@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import StartingFiveContainer from './StartingFiveContainer';
 
 const Container = styled.div`
-   max-width: 80%;
-   width: 1024px;
+   width: 80%;
+   max-width: 1200px;
    margin: 0 auto;
 `;
 
@@ -33,8 +33,8 @@ class StartingFive extends Component {
 
    render() {
       const { startingFives } = this.state;
-      const startingFiveContainer = startingFives.map(startingFive => (
-         <StartingFiveContainer data={startingFive} />
+      const startingFiveContainer = startingFives.map((startingFive, index) => (
+         <StartingFiveContainer data={startingFive} key={index} />
       ));
       return (
          <div>

@@ -92,10 +92,9 @@ class Search extends Component {
             changeCase.lowerCase(player.playerName) ===
             changeCase.lowerCase(this.state.searchInput)
          ) {
-            console.log(player);
             this.updatePlayerArray(player);
-            return player;
          }
+         return player;
       });
 
       if (playerInDB.length === 0) {
@@ -142,6 +141,7 @@ class Search extends Component {
                      );
                   });
             }
+            return player;
          });
       }
    };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NavBar = styled.div`
@@ -30,17 +30,24 @@ const NavBar = styled.div`
 class Nav extends Component {
    constructor(props) {
       super(props);
-      this.state = {};
+      this.state = {
+         isLoggedIn: this.props.isLoggedIn,
+         userId: this.props.userId,
+      };
    }
 
    render() {
-      console.log(localStorage.length);
       let userLoggedIn;
       if (localStorage.length > 0) {
          userLoggedIn = (
-            <Link to="/" onClick={this.props.logOut}>
-               <span>Log Out</span>
-            </Link>
+            <div>
+               <Link to="/" onClick={this.props.logOut}>
+                  <span>Log Out</span>
+               </Link>
+               <Link to={`/users/${localStorage.userId}`}>
+                  <span>My Lineups</span>
+               </Link>
+            </div>
          );
       } else if (localStorage.length === 0) {
          userLoggedIn = (

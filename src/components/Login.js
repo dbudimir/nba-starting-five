@@ -1,47 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import styled from 'styled-components';
+
+import Form from './styles/Form';
 
 import ErrorMessage from './ErrorMessage';
-
-const Form = styled.div`
-   margin-top: 60px;
-   h3 {
-      margin-bottom: 32px;
-   }
-   .label {
-      margin-top: 12px;
-      font-weight: 800;
-   }
-   input {
-      width: 500px;
-      height: 48px;
-      border: 0px;
-      border-bottom: 3px solid #000000;
-      font-size: 32px;
-      margin-bottom: 12px;
-      margin-top: 32px;
-      padding: 0 4px;
-   }
-   input::placeholder {
-      font-size: 32px;
-      padding: 6px 6px 0;
-      line-height: 1;
-   }
-   input[name='submit'] {
-      border-radius: 6px;
-      margin-bottom: 64px;
-      border-bottom: 0px;
-      font-size: 24px;
-      font-weight: 800;
-      background-color: #fa8320;
-      width: 200px;
-   }
-   span {
-      display: block;
-   }
-`;
 
 class Login extends Component {
    constructor() {
@@ -106,7 +69,7 @@ class Login extends Component {
             passwordValid = value.length >= 7;
             formErrors.password = passwordValid
                ? ''
-               : "Please use a password that's longer thant 7 charcters";
+               : "Please use a password that's longer thant 7 characters";
             break;
          default:
             break;
@@ -185,7 +148,7 @@ class Login extends Component {
                   name="submit"
                   onClick={this.onSubmit}
                   type="submit"
-                  value="submit"
+                  value="Log In"
                />
                <span className="sign-up-now">
                   Don't have an account?{' '}
