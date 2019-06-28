@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 // Children
 import StartingFive from './StartingFive';
@@ -35,6 +35,7 @@ class Body extends Component {
          },
       });
       localStorage.setItem('userId', userId);
+      localStorage.setItem('userName', userId);
       this.props.logIn(this.state, loginPath);
    };
 

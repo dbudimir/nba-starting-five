@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import StartingFiveContainer from './StartingFiveContainer';
 
 const Container = styled.div`
-   max-width: 80%;
+   max-width: 96%;
    width: 1024px;
    margin: 0 auto;
    .profile-header {

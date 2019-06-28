@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Redirect } from 'react-router';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -110,10 +111,14 @@ class StartingFiveUserSubmit extends Component {
       if (this.state.lineup.players.length < 5) {
          alert('Add five players to your lineup');
       } else {
-         axios.post(
-            'https://nba-starting-five.herokuapp.com/api/startingfive/new',
-            this.state
-         );
+         axios
+            .post(
+               'https://nba-starting-five.herokuapp.com/api/startingfive/new',
+               this.state
+            )
+            .then(() => {
+               this.props.history.push(`/users/${this.state.user.userId}`);
+            });
       }
    };
 
