@@ -25,7 +25,7 @@ class Body extends Component {
       };
    }
 
-   handleLogIn = (email, password, userId) => {
+   handleLogIn = (email, password, userId, isLoggedIn, loginPath) => {
       this.setState({
          user: {
             email,
@@ -35,8 +35,9 @@ class Body extends Component {
          },
       });
       console.log('logging in now');
+      console.log(loginPath);
       localStorage.setItem('userId', userId);
-      this.props.logIn(this.state);
+      this.props.logIn(this.state, loginPath);
    };
 
    render() {

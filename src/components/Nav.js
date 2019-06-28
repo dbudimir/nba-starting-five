@@ -8,8 +8,8 @@ const NavBar = styled.div`
    justify-content: space-between;
    align-items: center;
    color: #ffffff;
-   max-width: 100%;
    padding: 0px 24px;
+   flex-wrap: wrap;
    a {
       text-decoration: none;
       color: #ffffff;
@@ -23,6 +23,23 @@ const NavBar = styled.div`
       span {
          margin-left: 24px;
          font-size: 18px;
+      }
+   }
+   @media (max-width: 768px) {
+      h1 {
+         flex-basis: 100%;
+      }
+      .menu {
+         display: flex;
+         width: 100%;
+         justify-content: inherit;
+         margin-bottom: 12px;
+      }
+      .menu div {
+         margin-bottom: 12px;
+      }
+      .menu span {
+         margin: 0px;
       }
    }
 `;
@@ -62,7 +79,7 @@ class Nav extends Component {
             <Link to="/">
                <h1>Starting Five</h1>
             </Link>
-            <div>
+            <div className="menu">
                {userLoggedIn}
                <Link to="/signup">
                   <span>Sign Up</span>

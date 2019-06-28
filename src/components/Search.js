@@ -94,7 +94,7 @@ class Search extends Component {
          ) {
             this.updatePlayerArray(player);
          }
-         return player;
+         // return player;
       });
 
       if (playerInDB.length === 0) {
@@ -141,7 +141,7 @@ class Search extends Component {
                      );
                   });
             }
-            return player;
+            // return player;
          });
       }
    };
@@ -177,7 +177,6 @@ class Search extends Component {
    };
 
    render() {
-      console.log(this.state);
       return (
          <div>
             <h3>Add a player to the {this.props.lineupName} lineup.</h3>

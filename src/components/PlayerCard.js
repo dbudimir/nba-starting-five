@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 const Card = styled.div`
    width: 18%;
+   min-width: 180px;
+   max-width: 200px;
+   margin-top: 24px;
    transition: box-shadow 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
    .player-name {
       margin: 0 auto;
@@ -56,6 +59,9 @@ const Card = styled.div`
    }
    :hover {
       transform: scale(1.02);
+   }
+   @media (max-width: 768px) {
+      min-width: 48%;
    }
 `;
 

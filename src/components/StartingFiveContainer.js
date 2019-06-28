@@ -12,6 +12,12 @@ const Outer = styled.div`
       font-weight: 800;
       margin-bottom: 12px;
       margin-left: -42px;
+      @media (max-width: 1024px) {
+         font-size: 28px;
+         font-weight: 800;
+         margin-bottom: 12px;
+         margin-left: 0px;
+      }
    }
 `;
 

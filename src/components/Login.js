@@ -112,7 +112,8 @@ class Login extends Component {
                this.state.email,
                this.state.password,
                response.data.userId,
-               true
+               true,
+               this.props.location.pathname
             );
          });
    };

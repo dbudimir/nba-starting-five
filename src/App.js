@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 
 import Nav from './components/Nav';
 import Body from './components/Body';
@@ -16,7 +17,7 @@ class App extends Component {
       };
    }
 
-   setLogIn = bodyState => {
+   setLogIn = (bodyState, loginPath) => {
       this.setState({
          user: {
             email: bodyState.user.email,
@@ -25,6 +26,12 @@ class App extends Component {
             isLoggedIn: true,
          },
       });
+      if (loginPath === '/login') {
+         console.log('doing this');
+         console.log(bodyState.user.userId);
+
+         return <Redirect push to={`/user/${bodyState.user.userId}`} />;
+      }
    };
 
    handleLogOut = () => {

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import StartingFiveContainer from './StartingFiveContainer';
 
 const Container = styled.div`
-   width: 80%;
+   width: 96%;
    max-width: 1200px;
    margin: 0 auto;
 `;
