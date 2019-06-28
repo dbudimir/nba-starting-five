@@ -34,8 +34,6 @@ class Body extends Component {
             isLoggedIn: true,
          },
       });
-      console.log('logging in now');
-      console.log(loginPath);
       localStorage.setItem('userId', userId);
       this.props.logIn(this.state, loginPath);
    };
