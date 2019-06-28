@@ -74,7 +74,12 @@ class Signup extends Component {
                userId: response.data.userId,
                isLoggedIn: true,
             });
-            this.props.logIn(this.state.email, this.state.password, response.data.userId, true);
+            this.props.logIn(
+               this.state.email,
+               this.state.password,
+               response.data.userId,
+               true
+            );
          });
       alert('Nice!');
    };
@@ -88,7 +93,9 @@ class Signup extends Component {
       switch (fieldName) {
          case 'email':
             emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-            formErrors.email = emailValid ? '' : 'Please use a valid email address.';
+            formErrors.email = emailValid
+               ? ''
+               : 'Please use a valid email address.';
             break;
          case 'password':
             passwordValid = value.length >= 7;
@@ -97,8 +104,11 @@ class Signup extends Component {
                : "Please use a password that's longer thant 7 charcters";
             break;
          case 'passwordConfirm':
-            confirmPasswordValid = this.state.password === this.state.passwordConfirm;
-            formErrors.confirmPassword = confirmPasswordValid ? '' : 'The passwords do not match.';
+            confirmPasswordValid =
+               this.state.password === this.state.passwordConfirm;
+            formErrors.confirmPassword = confirmPasswordValid
+               ? ''
+               : 'The passwords do not match.';
             break;
          default:
             break;
@@ -118,7 +128,9 @@ class Signup extends Component {
    validateAll() {
       this.setState({
          allValid:
-            this.state.emailValid && this.state.passwordValid && this.state.confirmPasswordValid,
+            this.state.emailValid &&
+            this.state.passwordValid &&
+            this.state.confirmPasswordValid,
       });
    }
 
@@ -138,16 +150,6 @@ class Signup extends Component {
                   <div>
                      <br />
                   </div>
-                  {/* <input
-                  name="username"
-                  onChange={this.updateState}
-                  value={this.state.username}
-                  type="text"
-                  placeholder="create a username"
-               />
-               <div>
-                  <br />
-               </div> */}
                   <input
                      name="email"
                      onChange={this.updateState}
@@ -155,7 +157,10 @@ class Signup extends Component {
                      type="text"
                      placeholder="email"
                   />
-                  <ErrorMessage message={this.state.formErrors.email} state={this.state} />
+                  <ErrorMessage
+                     message={this.state.formErrors.email}
+                     state={this.state}
+                  />
                   <input
                      name="password"
                      onChange={this.updateState}
@@ -163,7 +168,10 @@ class Signup extends Component {
                      type="password"
                      placeholder="password"
                   />
-                  <ErrorMessage message={this.state.formErrors.password} state={this.state} />
+                  <ErrorMessage
+                     message={this.state.formErrors.password}
+                     state={this.state}
+                  />
                   <input
                      name="passwordConfirm"
                      onChange={this.updateState}
@@ -175,7 +183,12 @@ class Signup extends Component {
                      message={this.state.formErrors.confirmPassword}
                      state={this.state}
                   />
-                  <input name="submit" onClick={this.onSubmit} type="submit" value="submit" />
+                  <input
+                     name="submit"
+                     onClick={this.onSubmit}
+                     type="submit"
+                     value="submit"
+                  />
                </form>
             </Form>
          </div>

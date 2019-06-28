@@ -15,7 +15,7 @@ const Outer = styled.div`
    }
 `;
 
-const LineUpConatainer = styled.div`
+const LineUpContainer = styled.div`
    display: flex;
    flex-wrap: wrap;
    justify-content: space-between;
@@ -24,12 +24,14 @@ const LineUpConatainer = styled.div`
 class StartingFiveContainer extends Component {
    render() {
       const lineup = this.props.data.players;
-      const lineupContainer = lineup.map(lineup => <PlayerCard data={lineup} />);
+      const playersLineup = lineup.map(lineup => <PlayerCard data={lineup} />);
 
       return (
          <Outer className="lineup-outer">
             <h3>{this.props.data.name}</h3>
-            <LineUpConatainer className="lineup-container">{lineupContainer}</LineUpConatainer>
+            <LineUpContainer className="lineup-container">
+               {playersLineup}
+            </LineUpContainer>
          </Outer>
       );
    }

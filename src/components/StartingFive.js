@@ -38,10 +38,7 @@ class StartingFive extends Component {
       ));
       return (
          <div>
-            <Container>
-               {/* <h1>Popular Lineups</h1> */}
-               {startingFiveContainer}
-            </Container>
+            <Container>{startingFiveContainer}</Container>
          </div>
       );
    }

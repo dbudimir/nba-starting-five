@@ -175,8 +175,9 @@ class Login extends Component {
                   onChange={this.updateState}
                   value={this.state.password}
                   type="password"
+                  placeholder="Enter your password"
                />
-            <ErrorMessage
+               <ErrorMessage
                   message={this.state.formErrors.password}
                   state={this.state}
                />

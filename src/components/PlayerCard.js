@@ -70,21 +70,30 @@ class PlayerCard extends Component {
             <span className="player-name">{this.props.data.playerName}</span>
             <div className="player-content">
                <div className="player-image">
-                  <img src={this.props.data.playerImage} alt={this.props.data.playerName} />
+                  <img
+                     src={this.props.data.playerImage}
+                     alt={this.props.data.playerName}
+                  />
                </div>
                <span className="career-stats">Career Stats</span>
                <div className="player-stats">
                   <div>
                      <span className="stat-type">PPG</span>
-                     <span className="stat-value">{this.props.data.careerPPG}</span>
+                     <span className="stat-value">
+                        {this.props.data.careerPPG}
+                     </span>
                   </div>
                   <div>
                      <span className="stat-type">RPG</span>
-                     <span className="stat-value">{this.props.data.careerRPG}</span>
+                     <span className="stat-value">
+                        {this.props.data.careerRPG}
+                     </span>
                   </div>
                   <div>
                      <span className="stat-type">APG</span>
-                     <span className="stat-value">{this.props.data.careerAPG}</span>
+                     <span className="stat-value">
+                        {this.props.data.careerAPG}
+                     </span>
                   </div>
                   {/* <span>Remove Player</span> */}
                </div>

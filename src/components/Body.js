@@ -82,7 +82,10 @@ class Body extends Component {
                      />
                   )}
                />
-               <Route path="/" render={props => <StartingFive {...this.state} />} />
+               <Route
+                  path="/"
+                  render={props => <StartingFive {...this.state} />}
+               />
             </Switch>
          </div>
       );

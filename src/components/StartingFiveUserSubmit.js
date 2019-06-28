@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import Search from './Search';
 import PlayerCard from './PlayerCard';
 import Login from './Login';
-import Form from './Login';
 
 const SubmitContainer = styled.div`
    margin: 60px auto 0;
@@ -33,8 +32,13 @@ const SubmitContainer = styled.div`
          font-size: 32px;
          padding: 6px 6px 0;
       }
+      .player-card-contaier {
+         display: flex;
+         justify-content: space-evenly;
+         margin-top: -18px;
+         margin-bottom: 92px;
+      }
       .submit-button {
-         margin: 32px auto 0;
          border-radius: 6px;
          border-bottom: none;
          line-height: 0;
@@ -43,6 +47,9 @@ const SubmitContainer = styled.div`
          background-color: #fa8320;
          width: 200px;
          padding: 6px 24px;
+      }
+      .search-submit-button {
+         margin-left: 12px;
       }
    }
 `;
@@ -101,7 +108,7 @@ class StartingFiveUserSubmit extends Component {
 
    submitLineUp = () => {
       if (this.state.lineup.players.length < 5) {
-         alert('add five players to your lineup');
+         alert('Add five players to your lineup');
       } else {
          console.log(this.state);
          axios.post(
@@ -115,7 +122,7 @@ class StartingFiveUserSubmit extends Component {
       let startingFiveSubmit;
       if (localStorage.length === 0) {
          startingFiveSubmit = (
-            <div>
+            <div key="1">
                <Login
                   {...this.props}
                   {...this.state}
@@ -129,7 +136,7 @@ class StartingFiveUserSubmit extends Component {
          this.state.user.lineupNamed === false
       ) {
          startingFiveSubmit = (
-            <div className="lineup-info">
+            <div className="lineup-info" key="2">
                <h3>Enter a name for your lineup</h3>
                <input
                   onChange={this.updateLineUpName}
@@ -148,10 +155,15 @@ class StartingFiveUserSubmit extends Component {
             <PlayerCard data={player} key={index} />
          ));
          startingFiveSubmit = (
-            <div className="lineup-info">
-               <Search getPlayers={this.getPlayers} />
-               <div>{playerCard}</div>
-               <span onClick={this.submitLineUp}>Submit Lineup</span>
+            <div className="lineup-info" key="3">
+               <Search
+                  getPlayers={this.getPlayers}
+                  lineupName={this.state.lineup.name}
+               />
+               <div className="player-card-contaier">{playerCard}</div>
+               <span onClick={this.submitLineUp} className="submit-button">
+                  Submit Lineup
+               </span>
             </div>
          );
       }

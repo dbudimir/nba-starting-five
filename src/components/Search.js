@@ -89,7 +89,8 @@ class Search extends Component {
       const publicPlayerList = this.state.playerList;
       const playerInDB = playerDataBaseList.filter(player => {
          if (
-            changeCase.lowerCase(player.playerName) === changeCase.lowerCase(this.state.searchInput)
+            changeCase.lowerCase(player.playerName) ===
+            changeCase.lowerCase(this.state.searchInput)
          ) {
             console.log(player);
             this.updatePlayerArray(player);
@@ -161,14 +162,45 @@ class Search extends Component {
       );
    };
 
+   undoAdd = e => {
+      e.preventDefault();
+      const undoArray = this.state.lineup;
+      undoArray.shift();
+      this.setState(
+         {
+            lineup: undoArray,
+         },
+         () => {
+            this.props.getPlayers(this.state.lineup);
+         }
+      );
+   };
+
    render() {
+      console.log(this.state);
       return (
          <div>
-            <p>Search for a player</p>
-            <input onChange={this.updateState} className="text-input" name="searchInput" />
-            <button onClick={this.getPlayer} type="button">
-               get players
-            </button>
+            <h3>Add a player to the {this.props.lineupName} lineup.</h3>
+            <input
+               onChange={this.updateState}
+               className="text-input"
+               name="searchInput"
+               placeholder="Search for a player by name"
+            />
+            <span
+               onClick={this.getPlayer}
+               className="submit-button search-submit-button"
+               type="button"
+            >
+               Add Player
+            </span>
+            <span
+               onClick={this.undoAdd}
+               className="submit-button search-submit-button"
+               type="button"
+            >
+               Undo
+            </span>
          </div>
       );
    }
