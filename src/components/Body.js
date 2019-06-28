@@ -43,6 +43,7 @@ class Body extends Component {
          },
       });
       localStorage.setItem('userId', userId);
+      window.location.reload();
    };
 
    render() {

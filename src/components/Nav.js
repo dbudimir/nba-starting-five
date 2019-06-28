@@ -28,19 +28,24 @@ const NavBar = styled.div`
 `;
 
 class Nav extends Component {
+   constructor(props) {
+      super(props);
+      this.state = {};
+   }
+
    render() {
-      console.log(this.props);
+      console.log(localStorage.length);
       let userLoggedIn;
-      if (localStorage.length === 0) {
-         userLoggedIn = (
-            <Link to="/login">
-               <span>Log In</span>
-            </Link>
-         );
-      } else if (localStorage.length > 0) {
+      if (localStorage.length > 0) {
          userLoggedIn = (
             <Link to="/" onClick={this.props.logOut}>
                <span>Log Out</span>
+            </Link>
+         );
+      } else if (localStorage.length === 0) {
+         userLoggedIn = (
+            <Link to="/login">
+               <span>Log In</span>
             </Link>
          );
       }
