@@ -6,7 +6,7 @@ Read more read about the associated API [here.](https://github.com/ellisonr/api-
 
 This simple app allows users to create an account, login, create a list of 5 players as part of a unique lineup. Users will be able to share their top players for any niche category they choose. For example, top 5 best dunkers, Canadian players, best all time Lakers etc.
 
-![enter image description here](https://www.budimir.dev/starting-five-img.png)
+![NBA Starting Five](https://www.budimir.dev/static/media/starting-five-thumb.7e75cdc4.png)
 
 ### **Features**
 
@@ -73,40 +73,38 @@ if (playerInDB.length === 0) {
 
 ### **Site Structure**
 
--  **Navigation**
--  **Login**: User can login to an existing account.
--  **My Lineups**: After a user has logged in they can see a list of their existing lineups.
--  **Signup**: Allows a new user to sign up.
--  **Create a Lineup**: A two step flow that allows a user to create their lineup. If a user is not logged in they will be prompted to login before they can create a lineup.
--  **Home**: A feed of recent line.ups submitted by users.
+- **Navigation**
+- **Login**: User can login to an existing account.
+- **My Lineups**: After a user has logged in they can see a list of their existing lineups.
+- **Signup**: Allows a new user to sign up.
+- **Create a Lineup**: A two step flow that allows a user to create their lineup. If a user is not logged in they will be prompted to login before they can create a lineup.
+- **Home**: A feed of recent line.ups submitted by users.
 
 ### **Dependencies**
 
--  "axios": "^0.19.0",
--  "babel-eslint": "10.0.1",
--  "change-case": "^3.1.0",
--  "react": "^16.8.6",
--  "react-dom": "^16.8.6",
--  "react-router": "^5.0.1",
--  "react-router-dom": "^5.0.1",
--  "react-scripts": "3.0.1",
--  "request": "^2.88.0",
--  "styled-components": "^4.3.2"
+- "axios": "^0.19.0",
+- "babel-eslint": "10.0.1",
+- "change-case": "^3.1.0",
+- "react": "^16.8.6",
+- "react-dom": "^16.8.6",
+- "react-router": "^5.0.1",
+- "react-router-dom": "^5.0.1",
+- "react-scripts": "3.0.1",
+- "request": "^2.88.0",
+- "styled-components": "^4.3.2"
 
 ### **Technologies Used**
 
--  **Javascript**
--  **React**
--  **Styled Components**
--  **Bing Search API**
+- **Javascript**
+- **React**
+- **Styled Components**
+- **Bing Search API**
 
 ### **Contribution Guidelines**
 
 Fork and clone this repo, contribute from a new branch.
 
--  Deployed App: [[https://earsplitting-account.surge.sh/](https://earsplitting-account.surge.sh/)]
--  API: [https://nba-starting-five.herokuapp.com/api/players/](https://nba-starting-five.herokuapp.com/api/players/)
--  This Repository: [[https://github.com/dbudimir/nba-starting-five/tree/master/src/components](https://github.com/dbudimir/nba-starting-five/tree/master/src/components)]
--  Issue tracker: [[https://github.com/dbudimir/nba-starting-five/issues](https://github.com/dbudimir/nba-starting-five/issues)]
-
-Contact me: [dav.budimir@gmail.com](mailto:dav.budimir@gmail.com)
+- Deployed App: [[https://nba-starting-five.surge.sh/](https://nba-starting-five.surge.sh//)]
+- API: [https://nba-starting-five.herokuapp.com/api/players/](https://nba-starting-five.herokuapp.com/api/players/)
+- This Repository: [[https://github.com/dbudimir/nba-starting-five/tree/master/src/components](https://github.com/dbudimir/nba-starting-five/tree/master/src/components)]
+- Issue tracker: [[https://github.com/dbudimir/nba-starting-five/issues](https://github.com/dbudimir/nba-starting-five/issues)]

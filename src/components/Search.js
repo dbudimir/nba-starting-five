@@ -84,7 +84,6 @@ class Search extends Component {
    }
 
    getPlayer = () => {
-      console.log('getting player');
       const playerDataBaseList = this.state.playerDataBase;
       const publicPlayerList = this.state.playerList;
       const playerInDB = playerDataBaseList.filter(player => {
